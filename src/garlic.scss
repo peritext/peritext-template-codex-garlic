@@ -1,0 +1,453 @@
+
+/**
+ * Template-specific reusable elements (variables, mixins, abstract classes)
+ */
+
+// 1. variables
+$gutter-small: .4rem;
+$gutter-medium: $gutter-small * 1.666;
+$gutter-large: $gutter-medium * 3;
+
+$nav-width: 20%;
+$aside-width: 20%;
+
+$color-primary: #414E4D; // blued dark grey
+$color-secondary: #F32E36; // fresh red
+$color-secondary-intent: #87240E; // bordeaux red
+$color-background: #FDFFF8; // cream
+$color-background-darker: #e7eae1; // cream darkside
+$color-secondary-background: rgba(255,255,255,.8);// white desopacified
+
+$color-primary-background: #f4f4f4;
+$color-strokes: #dddbd9;
+
+$font-size-1: $gutter-small * .9;
+$font-size-2: $font-size-1 * 1.6;
+$font-size-3: $font-size-2 * 1.6;
+$font-size-4: $font-size-3 * 1.6;
+$font-size-5: $font-size-4 * 1.6;
+
+
+$font-stack-serif: Merriweather, serif;
+$font-stack-sans-serif: Roboto, serif;
+
+body{
+    font-family: $font-stack-serif;
+    color: $color-primary;
+}
+
+*{  
+    prince-footnote-policy: keep-with-block;
+    prince-bookmark-label: none;
+    quotes: "« " " »";
+}
+
+p{
+    text-indent: $gutter-medium;
+}
+p,
+li,
+pre,
+blockquote,
+figcaption{
+    line-height: $gutter-medium * 1.2;
+    font-size: $font-size-2;
+}
+li{
+  margin-bottom: $gutter-medium;
+}
+
+figure{
+    background: $color-background;
+    padding: $gutter-small;
+    font-size: $font-size-1;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+    border-bottom : 1px solid $color-secondary;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: $font-stack-sans-serif;
+    page-break-inside: avoid;
+}
+.section-title{
+
+  font-size: $font-size-5;
+}
+h1{
+  font-size: $font-size-4;
+}
+h2{
+  font-size: $font-size-3;
+}
+h3{
+  font-size: $font-size-2;
+}
+
+.block-contextualization-container,
+svg,
+img
+{
+  max-width: 100%;
+  overflow: hidden;
+}
+
+
+/**
+ * Notes styling
+ */
+.footnote{
+    display: prince-footnote;
+    counter-increment: footnote;
+    footnote-display: inline;
+}
+
+.footnote-content{
+   font-size: $font-size-1;
+   .footnote-p,
+   .footnote-h1,
+   .footnote-h2,
+   .footnote-h3,
+   .footnote-h4,
+   .footnote-h5,
+   .footnote-h6,
+   .footnote-ul,
+   .footnote-ol,
+   .footnote-li,
+   .footnote-pre,
+   .footnote-blockquote{
+    display: block;
+   }
+
+   .footnote-p{
+    text-indent: $gutter-small;
+   }
+   .footnote-h1,
+   .footnote-h2,
+   .footnote-h3,
+   .footnote-h4,
+   .footnote-h5,
+   .footnote-h6
+   {
+    font-size: $font-size-2;
+   }
+   .footnote-pre{
+
+   }
+}
+
+.footnote::footnote-call {
+    content: counter(footnote);
+    font-size: 83%;
+    vertical-align: super;
+    line-height: none;
+}
+
+// .note-number,
+// .note-pointer
+// {
+//     background: $color-secondary;
+//     color: white;
+//     border-radius: 50%;
+//     width: $font-size-2;
+//     height: $font-size-2;
+//     text-align: center;
+// }
+
+@page {
+    padding: 1cm;
+    @footnotes {
+        // border-top: solid $color-secondary thin;
+        padding-top: $gutter-small;
+    }
+}
+
+
+img
+{
+    width: 9999em;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+.section-container{
+  text-align: justify;
+    text-justify: inter-word;
+  // counter-reset: footnote;
+}
+
+
+@page
+{
+
+    @bottom
+    {
+        content: counter(page);
+    }
+}
+
+
+
+.table-of-contents-container a::after,
+.table-of-figures-container a::after
+{
+    content: leader('.') target-counter(attr(href), page);
+}
+
+// blocks
+
+.page-link
+{
+    content: target-counter(attr(href), page);
+}
+
+.separate-pages
+{
+    page-break-before: always;
+    page-break-after: always;
+}
+.empty-page
+{
+    page-break-after: always;
+    page: empty-page;
+}
+
+@page empty-page
+{
+
+  @bottom
+  {
+      content: none;
+  }
+}
+
+
+.bookmark-level-0 {
+    prince-bookmark-level: 1;
+}
+
+.bookmark-level-1 {
+    prince-bookmark-level: 2;
+}
+
+.bookmark-level-2 {
+    prince-bookmark-level: 3;
+}
+.bookmark-level-3 {
+    prince-bookmark-level: 4;
+}
+.bookmark-level-4 {
+    prince-bookmark-level: 5;
+}
+.bookmark-level-5 {
+    prince-bookmark-level: 6;
+}
+.bookmark-level-6 {
+    prince-bookmark-level: 7;
+}
+
+.bookmark-title {
+    prince-bookmark-label: attr(title);
+}
+
+
+
+/**
+ * Cover styling
+ */
+
+.front-cover-container
+{
+    page-break-after:always;
+    page-break-before:never;
+    &.with-image{
+      .cover-content{
+        display: none;
+      }
+    }
+}
+
+#cover-image{
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.cover-content{
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+}
+
+@page:first
+{
+  margin : 0;
+  page-break-after: always;
+  padding: 0;
+  @bottom
+  {
+      content: none;
+  }
+}
+
+.second-front-cover-container{
+  text-align: center;
+  padding-top: 10cm;
+
+  page: second-front;
+
+  h1,h2,h3{
+    font-family: $font-stack-serif;
+  }
+}
+
+@page second-front{
+  @bottom
+  {
+      content: none;
+  }
+}
+
+@page back-cover
+{
+  margin : 0;
+  page-break-before: always;
+  background: $color-primary;
+  color: $color-background;
+  padding: 5cm;
+  @bottom
+  {
+      content: none;
+  }
+}
+
+.back-cover-container
+{
+    page: back-cover;
+    page-break-before:always;
+    font-size: $font-size-4;
+    p{
+      font-size: $font-size-2;
+    }
+    p,h2,h3{
+      color: $color-background;
+    }
+    .peritext-static-back-subtitle{
+      font-style: italic;
+      margin-left: $gutter-medium;
+    }
+}
+
+.table-of-contents
+{
+  page: table-of-contents;
+}
+
+/**
+ * Special pages
+ */
+.mentions-container{
+  padding: 0;
+  margin: 0;
+  ul, ol{
+    padding: 0;
+    margin : 0;
+  }
+  li{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: $gutter-medium;
+  }
+  .mentions-list{
+    font-size: $font-size-1;
+    margin-top: $gutter-small;
+    font-style: italic;
+    text-indent: $gutter-small;
+  }
+}
+
+/**
+ * Fix for citations numbering
+ */
+.csl-left-margin,
+.csl-right-inline{
+  display: inline-block;
+} 
+
+.end-notes{
+  padding: 0;
+  margin: 0;
+  li{
+    margin: 0;
+    padding: 0;
+    margin-bottom: $gutter-medium;
+    list-style-type: none;
+    > div{
+      margin-top: -$font-size-2*1.5;
+      margin-left: $gutter-medium;
+    }
+  }
+}
+
+
+/**
+ * Figures
+ */
+
+table{
+    max-width: 100%;
+    font-size: $font-size-1;
+    font-family: $font-stack-sans-serif;
+    text-align: left;
+    width: 90%;
+    border-collapse: collapse;
+    border: solid 1px $color-primary;
+    font-weight: 200;
+}
+
+table thead tr{
+    background: $color-primary;
+    color: white;
+}
+table tbody tr:nth-child(even) {
+    background: $color-background;
+}
+table th { 
+    border: solid 1px $color-primary ;
+    padding: $gutter-small;
+}
+
+/**
+ * Contextualizers setting
+ */
+
+.peritext-contextualizer-codefiles
+{
+
+  font-family: monospace;
+  pre{
+  counter-reset: line;
+
+  }
+
+  .code-line {
+      display: block;
+      line-height: $gutter-medium;
+      
+      &:before {
+        width: $gutter-medium;
+        text-align: right;
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        border-right: 1px solid #ddd;
+        padding: 0 .5em;
+        margin-right: .5em;
+        color: #888
+      }
+    }
+}

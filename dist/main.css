@@ -1,0 +1,303 @@
+@charset "UTF-8";
+/**
+ * Template-specific reusable elements (variables, mixins, abstract classes)
+ */
+body {
+  font-family: Merriweather, serif;
+  color: #414E4D; }
+
+* {
+  prince-footnote-policy: keep-with-block;
+  prince-bookmark-label: none;
+  quotes: "\AB   " " \BB"; }
+
+p {
+  text-indent: 0.6664rem; }
+
+p,
+li,
+pre,
+blockquote,
+figcaption {
+  line-height: 0.79968rem;
+  font-size: 0.576rem; }
+
+li {
+  margin-bottom: 0.6664rem; }
+
+figure {
+  background: #FDFFF8;
+  padding: 0.4rem;
+  font-size: 0.36rem; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid #F32E36; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Roboto, serif;
+  page-break-inside: avoid; }
+
+.section-title {
+  font-size: 2.3593rem; }
+
+h1 {
+  font-size: 1.47456rem; }
+
+h2 {
+  font-size: 0.9216rem; }
+
+h3 {
+  font-size: 0.576rem; }
+
+.block-contextualization-container,
+svg,
+img {
+  max-width: 100%;
+  overflow: hidden; }
+
+/**
+ * Notes styling
+ */
+.footnote {
+  display: prince-footnote;
+  counter-increment: footnote;
+  footnote-display: inline; }
+
+.footnote-content {
+  font-size: 0.36rem; }
+  .footnote-content .footnote-p,
+  .footnote-content .footnote-h1,
+  .footnote-content .footnote-h2,
+  .footnote-content .footnote-h3,
+  .footnote-content .footnote-h4,
+  .footnote-content .footnote-h5,
+  .footnote-content .footnote-h6,
+  .footnote-content .footnote-ul,
+  .footnote-content .footnote-ol,
+  .footnote-content .footnote-li,
+  .footnote-content .footnote-pre,
+  .footnote-content .footnote-blockquote {
+    display: block; }
+  .footnote-content .footnote-p {
+    text-indent: 0.4rem; }
+  .footnote-content .footnote-h1,
+  .footnote-content .footnote-h2,
+  .footnote-content .footnote-h3,
+  .footnote-content .footnote-h4,
+  .footnote-content .footnote-h5,
+  .footnote-content .footnote-h6 {
+    font-size: 0.576rem; }
+
+.footnote::footnote-call {
+  content: counter(footnote);
+  font-size: 83%;
+  vertical-align: super;
+  line-height: none; }
+
+@page {
+  padding: 1cm;
+  @footnotes {
+    padding-top: 0.4rem; } }
+
+img {
+  width: 9999em;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%; }
+
+.section-container {
+  text-align: justify;
+  text-justify: inter-word; }
+
+@page {
+  @bottom {
+    content: counter(page); } }
+
+.table-of-contents-container a::after,
+.table-of-figures-container a::after {
+  content: leader(".") target-counter(attr(href), page); }
+
+.page-link {
+  content: target-counter(attr(href), page); }
+
+.separate-pages {
+  page-break-before: always;
+  page-break-after: always; }
+
+.empty-page {
+  page-break-after: always;
+  page: empty-page; }
+
+@page empty-page {
+  @bottom {
+    content: none; } }
+
+.bookmark-level-0 {
+  prince-bookmark-level: 1; }
+
+.bookmark-level-1 {
+  prince-bookmark-level: 2; }
+
+.bookmark-level-2 {
+  prince-bookmark-level: 3; }
+
+.bookmark-level-3 {
+  prince-bookmark-level: 4; }
+
+.bookmark-level-4 {
+  prince-bookmark-level: 5; }
+
+.bookmark-level-5 {
+  prince-bookmark-level: 6; }
+
+.bookmark-level-6 {
+  prince-bookmark-level: 7; }
+
+.bookmark-title {
+  prince-bookmark-label: attr(title); }
+
+/**
+ * Cover styling
+ */
+.front-cover-container {
+  page-break-after: always;
+  page-break-before: never; }
+  .front-cover-container.with-image .cover-content {
+    display: none; }
+
+#cover-image {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%; }
+
+.cover-content {
+  position: absolute;
+  left: 1rem;
+  top: 1rem; }
+
+@page :first {
+  margin: 0;
+  page-break-after: always;
+  padding: 0;
+  @bottom {
+    content: none; } }
+
+.second-front-cover-container {
+  text-align: center;
+  padding-top: 10cm;
+  page: second-front; }
+  .second-front-cover-container h1, .second-front-cover-container h2, .second-front-cover-container h3 {
+    font-family: Merriweather, serif; }
+
+@page second-front {
+  @bottom {
+    content: none; } }
+
+@page back-cover {
+  margin: 0;
+  page-break-before: always;
+  background: #414E4D;
+  color: #FDFFF8;
+  padding: 5cm;
+  @bottom {
+    content: none; } }
+
+.back-cover-container {
+  page: back-cover;
+  page-break-before: always;
+  font-size: 1.47456rem; }
+  .back-cover-container p {
+    font-size: 0.576rem; }
+  .back-cover-container p, .back-cover-container h2, .back-cover-container h3 {
+    color: #FDFFF8; }
+  .back-cover-container .peritext-static-back-subtitle {
+    font-style: italic;
+    margin-left: 0.6664rem; }
+
+.table-of-contents {
+  page: table-of-contents; }
+
+/**
+ * Special pages
+ */
+.mentions-container {
+  padding: 0;
+  margin: 0; }
+  .mentions-container ul, .mentions-container ol {
+    padding: 0;
+    margin: 0; }
+  .mentions-container li {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0.6664rem; }
+  .mentions-container .mentions-list {
+    font-size: 0.36rem;
+    margin-top: 0.4rem;
+    font-style: italic;
+    text-indent: 0.4rem; }
+
+/**
+ * Fix for citations numbering
+ */
+.csl-left-margin,
+.csl-right-inline {
+  display: inline-block; }
+
+.end-notes {
+  padding: 0;
+  margin: 0; }
+  .end-notes li {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0.6664rem;
+    list-style-type: none; }
+    .end-notes li > div {
+      margin-top: -0.864rem;
+      margin-left: 0.6664rem; }
+
+/**
+ * Figures
+ */
+table {
+  max-width: 100%;
+  font-size: 0.36rem;
+  font-family: Roboto, serif;
+  text-align: left;
+  width: 90%;
+  border-collapse: collapse;
+  border: solid 1px #414E4D;
+  font-weight: 200; }
+
+table thead tr {
+  background: #414E4D;
+  color: white; }
+
+table tbody tr:nth-child(even) {
+  background: #FDFFF8; }
+
+table th {
+  border: solid 1px #414E4D;
+  padding: 0.4rem; }
+
+/**
+ * Contextualizers setting
+ */
+.peritext-contextualizer-codefiles {
+  font-family: monospace; }
+  .peritext-contextualizer-codefiles pre {
+    counter-reset: line; }
+  .peritext-contextualizer-codefiles .code-line {
+    display: block;
+    line-height: 0.6664rem; }
+    .peritext-contextualizer-codefiles .code-line:before {
+      width: 0.6664rem;
+      text-align: right;
+      counter-increment: line;
+      content: counter(line);
+      display: inline-block;
+      border-right: 1px solid #ddd;
+      padding: 0 .5em;
+      margin-right: .5em;
+      color: #888; }
