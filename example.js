@@ -1,7 +1,8 @@
 const path = require('path');
 const generatePdf = require('peritext-generator-pdf');
 const template = require('./dist/index');
-const story = require('./examples/story');
+const story1 = require('./examples/story-1');
+const story2 = require('./examples/story-2');
 const exampleLocale = require('./example-locale');
 
 const contextualizers = {
@@ -20,7 +21,15 @@ const contextualizers = {
 };
 
 generatePdf({
-  story: story,
+  story: story1,
+  contextualizers,
+  template: template,
+  locale: exampleLocale,
+  tempDirPath: path.resolve(__dirname + '/temp'),
+  outputDirPath: path.resolve(__dirname + '/examples')
+});
+generatePdf({
+  story: story2,
   contextualizers,
   template: template,
   locale: exampleLocale,
