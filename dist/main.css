@@ -4,7 +4,8 @@
  */
 body {
   font-family: Merriweather, serif;
-  color: #414E4D; }
+  color: #414E4D;
+  text-rendering: optimizeLegibility; }
 
 * {
   prince-footnote-policy: keep-with-block;
@@ -12,23 +13,26 @@ body {
   quotes: "\AB   " " \BB"; }
 
 p {
-  text-indent: 0.6664rem; }
+  text-indent: 0.833rem; }
 
 p,
 li,
 pre,
 blockquote,
 figcaption {
-  line-height: 0.79968rem;
-  font-size: 0.576rem; }
+  line-height: 0.9996rem;
+  font-size: 0.72rem;
+  page-break-inside: avoid;
+  orphans: 3;
+  widows: 3; }
 
 li {
-  margin-bottom: 0.6664rem; }
+  margin-bottom: 0.833rem; }
 
 figure {
   background: #FDFFF8;
-  padding: 0.4rem;
-  font-size: 0.36rem; }
+  padding: 0.5rem;
+  font-size: 0.45rem; }
 
 a {
   color: inherit;
@@ -40,16 +44,16 @@ h1, h2, h3, h4, h5, h6 {
   page-break-inside: avoid; }
 
 .section-title {
-  font-size: 2.3593rem; }
+  font-size: 2.94912rem; }
 
 h1 {
-  font-size: 1.47456rem; }
+  font-size: 1.8432rem; }
 
 h2 {
-  font-size: 0.9216rem; }
+  font-size: 1.152rem; }
 
 h3 {
-  font-size: 0.576rem; }
+  font-size: 0.72rem; }
 
 .block-contextualization-container,
 svg,
@@ -66,7 +70,7 @@ img {
   footnote-display: inline; }
 
 .footnote-content {
-  font-size: 0.36rem; }
+  font-size: 0.45rem; }
   .footnote-content .footnote-p,
   .footnote-content .footnote-h1,
   .footnote-content .footnote-h2,
@@ -81,14 +85,14 @@ img {
   .footnote-content .footnote-blockquote {
     display: block; }
   .footnote-content .footnote-p {
-    text-indent: 0.4rem; }
+    text-indent: 0.5rem; }
   .footnote-content .footnote-h1,
   .footnote-content .footnote-h2,
   .footnote-content .footnote-h3,
   .footnote-content .footnote-h4,
   .footnote-content .footnote-h5,
   .footnote-content .footnote-h6 {
-    font-size: 0.576rem; }
+    font-size: 0.72rem; }
 
 .footnote::footnote-call {
   content: counter(footnote);
@@ -97,9 +101,10 @@ img {
   line-height: none; }
 
 @page {
-  padding: 1cm;
+  padding: 1.5cm;
+  padding-top: 1cm;
   @footnotes {
-    padding-top: 0.4rem; } }
+    padding-top: 0.5rem; } }
 
 img {
   width: 9999em;
@@ -178,10 +183,10 @@ img {
     .front-cover-container .cover-content h1, .front-cover-container .cover-content h2, .front-cover-container .cover-content h3 {
       color: #414E4D;
       background: #FDFFF8;
-      padding: 0.6664rem;
+      padding: 0.833rem;
       display: inline-block; }
     .front-cover-container .cover-content h1 {
-      font-size: 2.3593rem; }
+      font-size: 2.94912rem; }
 
 @page front-cover {
   background: #414E4D;
@@ -227,14 +232,14 @@ img {
 .back-cover-container {
   page: back-cover;
   page-break-before: always;
-  font-size: 1.47456rem; }
+  font-size: 1.8432rem; }
   .back-cover-container p {
-    font-size: 0.576rem; }
+    font-size: 0.72rem; }
   .back-cover-container p, .back-cover-container h2, .back-cover-container h3 {
     color: #FDFFF8; }
   .back-cover-container .peritext-static-back-subtitle {
     font-style: italic;
-    margin-left: 0.6664rem; }
+    margin-left: 0.833rem; }
 
 .table-of-contents {
   page: table-of-contents; }
@@ -251,12 +256,12 @@ img {
   .mentions-container li {
     list-style-type: none;
     padding: 0;
-    margin-bottom: 0.6664rem; }
+    margin-bottom: 0.833rem; }
   .mentions-container .mentions-list {
-    font-size: 0.36rem;
-    margin-top: 0.4rem;
+    font-size: 0.45rem;
+    margin-top: 0.5rem;
     font-style: italic;
-    text-indent: 0.4rem; }
+    text-indent: 0.5rem; }
 
 /**
  * Fix for citations numbering
@@ -271,18 +276,18 @@ img {
   .end-notes li {
     margin: 0;
     padding: 0;
-    margin-bottom: 0.6664rem;
+    margin-bottom: 0.833rem;
     list-style-type: none; }
     .end-notes li > div {
-      margin-top: -0.864rem;
-      margin-left: 0.6664rem; }
+      margin-top: -1.08rem;
+      margin-left: 0.833rem; }
 
 /**
  * Figures
  */
 table {
   max-width: 100%;
-  font-size: 0.36rem;
+  font-size: 0.45rem;
   font-family: Roboto, serif;
   text-align: left;
   width: 90%;
@@ -299,7 +304,7 @@ table tbody tr:nth-child(even) {
 
 table th {
   border: solid 1px #414E4D;
-  padding: 0.4rem; }
+  padding: 0.5rem; }
 
 /**
  * Contextualizers setting
@@ -310,9 +315,9 @@ table th {
     counter-reset: line; }
   .peritext-contextualizer-codefiles .code-line {
     display: block;
-    line-height: 0.6664rem; }
+    line-height: 0.833rem; }
     .peritext-contextualizer-codefiles .code-line:before {
-      width: 0.6664rem;
+      width: 0.833rem;
       text-align: right;
       counter-increment: line;
       content: counter(line);

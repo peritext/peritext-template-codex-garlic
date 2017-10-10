@@ -4,7 +4,7 @@
  */
 
 // 1. variables
-$gutter-small: .4rem;
+$gutter-small: .5rem;
 $gutter-medium: $gutter-small * 1.666;
 $gutter-large: $gutter-medium * 3;
 
@@ -34,6 +34,7 @@ $font-stack-sans-serif: Roboto, serif;
 body{
     font-family: $font-stack-serif;
     color: $color-primary;
+    text-rendering: optimizeLegibility;
 }
 
 *{  
@@ -52,6 +53,9 @@ blockquote,
 figcaption{
     line-height: $gutter-medium * 1.2;
     font-size: $font-size-2;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
 }
 li{
   margin-bottom: $gutter-medium;
@@ -158,7 +162,8 @@ img
 // }
 
 @page {
-    padding: 1cm;
+    padding: 1.5cm;
+    padding-top: 1cm;
     @footnotes {
         // border-top: solid $color-secondary thin;
         padding-top: $gutter-small;
