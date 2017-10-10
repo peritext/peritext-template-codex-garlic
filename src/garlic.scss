@@ -260,6 +260,10 @@ img
  * Cover styling
  */
 
+#front-cover{
+    page: front-cover;
+}
+
 .front-cover-container
 {
     page-break-after:always;
@@ -269,6 +273,30 @@ img
         display: none;
       }
     }
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-contents: center;
+
+    .cover-content{
+      padding: 5cm;
+      h1,h2,h3{
+        color: $color-primary;
+        background: $color-background;
+        padding: $gutter-medium;
+        display: inline-block;
+      }
+
+      h1{
+
+      font-size: $font-size-5;        
+      }
+    }
+}
+
+@page front-cover{  
+  background: $color-primary;
+    color: $color-background;
 }
 
 #cover-image{

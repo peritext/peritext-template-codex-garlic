@@ -117,7 +117,13 @@ export default class Template extends Component {
       ),
       // authors index list
       (
-        Object.keys(story.resources).length > 0 ?
+        Object.keys(story.resources)
+        .filter(key => {
+          const res = story.resources[key];
+          const authors = res.authors;
+          return authors && authors.length;
+        })
+        .length > 0 ?
         {
           id: 'static-authors-index',
           title: locales.authorsIndex,

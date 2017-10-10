@@ -24,7 +24,7 @@ export default ({
           metadata.authors && 
           metadata.authors
           .map((author, index) => <span key={index}>{author.given} {author.family}</span>)
-                .reduce((prev, curr, index) =>  index > 0 ? [prev, ', ', curr] : [curr], [])}
+                .reduce((prev, curr, index) =>  index > 0 ? [prev, ', ', curr] : [curr], [])
         }
       </h3>
     </div>

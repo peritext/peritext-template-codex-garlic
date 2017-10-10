@@ -161,11 +161,31 @@ img {
 /**
  * Cover styling
  */
+#front-cover {
+  page: front-cover; }
+
 .front-cover-container {
   page-break-after: always;
-  page-break-before: never; }
+  page-break-before: never;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-contents: center; }
   .front-cover-container.with-image .cover-content {
     display: none; }
+  .front-cover-container .cover-content {
+    padding: 5cm; }
+    .front-cover-container .cover-content h1, .front-cover-container .cover-content h2, .front-cover-container .cover-content h3 {
+      color: #414E4D;
+      background: #FDFFF8;
+      padding: 0.6664rem;
+      display: inline-block; }
+    .front-cover-container .cover-content h1 {
+      font-size: 2.3593rem; }
+
+@page front-cover {
+  background: #414E4D;
+  color: #FDFFF8; }
 
 #cover-image {
   position: absolute;
