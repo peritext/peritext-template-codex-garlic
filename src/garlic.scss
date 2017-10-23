@@ -49,22 +49,35 @@ p{
 p,
 li,
 pre,
-blockquote,
-figcaption{
+blockquote{
     line-height: $gutter-medium * 1.2;
     font-size: $font-size-2;
     page-break-inside: avoid;
     orphans: 3;
     widows: 3;
+    text-align: justify;
+  text-justify: inter-word;
 }
 li{
   margin-bottom: $gutter-medium;
 }
 
 figure{
-    background: $color-background;
-    padding: $gutter-small;
+    // background: $color-background;
+    // padding: $gutter-small;
     font-size: $font-size-1;
+}
+
+figcaption{
+    font-size: $font-size-1;
+    padding: $gutter-medium;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
+
+    *{
+      padding: 0;
+    }
 }
 
 a{
@@ -177,12 +190,6 @@ img
     max-width: 100%;
     height: auto;
     max-height: 100%;
-}
-
-.section-container{
-  text-align: justify;
-    text-justify: inter-word;
-  // counter-reset: footnote;
 }
 
 

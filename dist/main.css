@@ -18,21 +18,29 @@ p {
 p,
 li,
 pre,
-blockquote,
-figcaption {
+blockquote {
   line-height: 0.9996rem;
   font-size: 0.72rem;
   page-break-inside: avoid;
   orphans: 3;
-  widows: 3; }
+  widows: 3;
+  text-align: justify;
+  text-justify: inter-word; }
 
 li {
   margin-bottom: 0.833rem; }
 
 figure {
-  background: #FDFFF8;
-  padding: 0.5rem;
   font-size: 0.45rem; }
+
+figcaption {
+  font-size: 0.45rem;
+  padding: 0.833rem;
+  page-break-inside: avoid;
+  orphans: 3;
+  widows: 3; }
+  figcaption * {
+    padding: 0; }
 
 a {
   color: inherit;
@@ -111,10 +119,6 @@ img {
   max-width: 100%;
   height: auto;
   max-height: 100%; }
-
-.section-container {
-  text-align: justify;
-  text-justify: inter-word; }
 
 @page {
   @bottom {

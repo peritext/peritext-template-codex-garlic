@@ -1,6 +1,6 @@
 {
   "name": "peritext-template-codex-garlic",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "Garlic template for codex outputs",
   "main": "dist/index.js",
   "scripts": {
