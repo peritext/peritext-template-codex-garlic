@@ -18,7 +18,7 @@ const SectionPointer = ({
   children,
   sectionId = ''
 }, context) => {
-  const sections = context.sections;
+  const sections = context.story && context.story.sections;
   const SectionLinkComponent = context.SectionLinkComponent;
   if (sections) {
     const section = sections[sectionId];
@@ -26,7 +26,7 @@ const SectionPointer = ({
       return (
         <span className="section-pointer" id={`section-pointer-${sectionId}`}>
           {SectionLinkComponent ? 
-            <SectionLinkComponent href={`#section-content-${sectionId}`}>
+            <SectionLinkComponent sectionId={sectionId}>
             {section.order}
             {children}
           </SectionLinkComponent>
@@ -61,13 +61,13 @@ SectionPointer.propTypes = {
  */
 SectionPointer.contextTypes = {
   /**
-   * Map of available sections to look into
+   * Story to look into
    */
-  sections: PropTypes.object,
+  story: PropTypes.object,
   /**
    * Triggers a callback upstream when the pointer is clicked
    */
-  onNoteContentPointerClick: PropTypes.func,
+  onSectionContentPointerClick: PropTypes.func,
 
   SectionLinkComponent: PropTypes.func,
 };

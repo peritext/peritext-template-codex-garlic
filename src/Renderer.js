@@ -6,6 +6,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import redraft from 'redraft';
+import {constants} from 'peritext-core';
 
 import Link from './Link';
 import BlockAssetWrapper from './BlockAssetWrapper';
@@ -13,17 +14,16 @@ import InlineAssetWrapper from './InlineAssetWrapper';
 import NotePointer from './NotePointer';
 import SectionPointer from './SectionPointer';
 import Footnote from './Footnote';
-import constants from './constants';
 const {
   LINK,
   BLOCK_ASSET,
   INLINE_ASSET,
   SECTION_POINTER,
   NOTE_POINTER,
-} = constants.entities;
+} = constants.draftEntitiesNames;
 
 // just a helper to add a <br /> after each block
-const addBreaklines = (children) => children.map(child => [child, <br />]);
+const addBreaklines = (children) => children.map((child, index) => [child, <br key={index} />]);
 
 /**
  * Define the renderers
@@ -78,7 +78,7 @@ const renderers = {
       return <NotePointer key={key} children={children} noteId={data.noteId} />;
     },
     [SECTION_POINTER]: (children, data, {key}) => {
-      return <SectionPointer key={key} children={children} noteId={data.noteId} />;
+      return <SectionPointer key={key} children={children} sectionId={data.sectionId} />;
     },
   },
 };

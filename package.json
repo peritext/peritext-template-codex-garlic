@@ -1,6 +1,6 @@
 {
   "name": "peritext-template-codex-garlic",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Garlic template for codex outputs",
   "main": "dist/index.js",
   "scripts": {
@@ -15,6 +15,7 @@
   "dependencies": {
     "babel-loader": "^7.1.1",
     "extract-text-webpack-plugin": "^3.0.0",
+    "peritext-core": "git+https://github.com/peritext/peritext-core.git",
     "peritext-generator-epub": "0.0.8",
     "react": "^16.0.0",
     "react-citeproc": "^0.1.7",

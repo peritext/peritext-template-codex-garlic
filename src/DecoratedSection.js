@@ -18,6 +18,7 @@ export default class DecoratedSection extends Component {
     ReferenceLinkComponent: this.props.ReferenceLinkComponent || this.context.ReferenceLinkComponent,
     GlossaryLinkComponent: this.props.GlossaryLinkComponent || this.context.GlossaryLinkComponent,
     NoteLinkComponent: this.props.NoteLinkComponent || this.context.NoteLinkComponent,
+    SectionLinkComponent: this.props.SectionLinkComponent || this.context.SectionLinkComponent,
   })
 
   render = () => {
@@ -57,5 +58,6 @@ DecoratedSection.childContextTypes = {
   ReferenceLinkComponent: PropTypes.func,
   GlossaryLinkComponent: PropTypes.func,
   NoteLinkComponent: PropTypes.func,
+  SectionLinkComponent: PropTypes.func,
 }
 
