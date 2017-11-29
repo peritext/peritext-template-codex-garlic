@@ -1,6 +1,6 @@
 {
   "name": "peritext-template-codex-garlic",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Garlic template for codex outputs",
   "main": "dist/index.js",
   "scripts": {
@@ -10,20 +10,21 @@
   "author": "Robin de Mourat",
   "license": "ISC",
   "peerDependencies": {
-    "react": "^15.6.1"
+    "react": "^16.0.0"
   },
   "dependencies": {
     "babel-loader": "^7.1.1",
     "extract-text-webpack-plugin": "^3.0.0",
-    "react": "^15.6.1",
+    "peritext-generator-epub": "0.0.8",
+    "react": "^16.0.0",
     "react-citeproc": "^0.1.7",
     "redraft": "^0.8.0",
-    "typeface-merriweather": "0.0.35",
-    "typeface-roboto": "0.0.35"
+    "typeface-merriweather": "0.0.40",
+    "typeface-roboto": "0.0.41"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
-    "babel-eslint": "^7.0.0",
+    "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-decorators": "^6.13.0",
@@ -37,10 +38,10 @@
     "babel-runtime": "^6.26.0",
     "css-loader": "^0.28.5",
     "node-sass": "^4.5.3",
-    "peritext-contextualizer-bib": "0.0.9",
+    "peritext-contextualizer-bib": "0.0.12",
     "peritext-contextualizer-codefiles": "0.0.8",
     "peritext-contextualizer-data-presentation": "0.0.8",
-    "peritext-contextualizer-dicto": "0.0.11",
+    "peritext-contextualizer-dicto": "0.0.14",
     "peritext-contextualizer-embed": "0.0.6",
     "peritext-contextualizer-glossary": "0.0.6",
     "peritext-contextualizer-image": "0.0.5",
@@ -50,10 +51,11 @@
     "peritext-contextualizer-video": "0.0.8",
     "peritext-contextualizer-webpage": "0.0.8",
     "peritext-generator-pdf": "0.0.3",
-    "peritext-rendering-utils": "0.0.15",
+    "peritext-rendering-utils": "0.0.18",
     "raw-loader": "^0.5.1",
+    "react-dom": "^16.0.0",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
+    "style-loader": "^0.19.0",
     "webpack": "^3.5.5",
     "webpack-node-externals": "^1.6.0"
   }

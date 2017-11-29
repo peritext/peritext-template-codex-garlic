@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -155,6 +155,17 @@ var _inherits2 = __webpack_require__(5);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _defineProperty2 = __webpack_require__(17);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _entities; /**
+                * This module exports a statefull reusable draft-js raw-to-react renderer component
+                * It wrapps around the redraft engine that converts draft-s raw to a react representation,
+                * providing it specific settings and callbacks.
+                */
+
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -163,38 +174,49 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _redraft = __webpack_require__(17);
+var _redraft = __webpack_require__(18);
 
 var _redraft2 = _interopRequireDefault(_redraft);
 
-var _Link = __webpack_require__(18);
+var _Link = __webpack_require__(19);
 
 var _Link2 = _interopRequireDefault(_Link);
 
-var _BlockAssetWrapper = __webpack_require__(19);
+var _BlockAssetWrapper = __webpack_require__(20);
 
 var _BlockAssetWrapper2 = _interopRequireDefault(_BlockAssetWrapper);
 
-var _InlineAssetWrapper = __webpack_require__(20);
+var _InlineAssetWrapper = __webpack_require__(21);
 
 var _InlineAssetWrapper2 = _interopRequireDefault(_InlineAssetWrapper);
 
-var _NotePointer = __webpack_require__(21);
+var _NotePointer = __webpack_require__(22);
 
 var _NotePointer2 = _interopRequireDefault(_NotePointer);
 
-var _Footnote = __webpack_require__(22);
+var _SectionPointer = __webpack_require__(34);
+
+var _SectionPointer2 = _interopRequireDefault(_SectionPointer);
+
+var _Footnote = __webpack_require__(23);
 
 var _Footnote2 = _interopRequireDefault(_Footnote);
 
+var _constants = __webpack_require__(36);
+
+var _constants2 = _interopRequireDefault(_constants);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _constants$entities = _constants2.default.entities,
+    LINK = _constants$entities.LINK,
+    BLOCK_ASSET = _constants$entities.BLOCK_ASSET,
+    INLINE_ASSET = _constants$entities.INLINE_ASSET,
+    SECTION_POINTER = _constants$entities.SECTION_POINTER,
+    NOTE_POINTER = _constants$entities.NOTE_POINTER;
+
 // just a helper to add a <br /> after each block
-/**
- * This module exports a statefull reusable draft-js raw-to-react renderer component
- * It wrapps around the redraft engine that converts draft-s raw to a react representation,
- * providing it specific settings and callbacks.
- */
+
 var addBreaklines = function addBreaklines(children) {
   return children.map(function (child) {
     return [child, _react2.default.createElement('br', null)];
@@ -371,32 +393,30 @@ var renderers = {
   /**
    * Entities receive children and the entity data
    */
-  entities: {
-    //   // key is the entity key value from raw
-    LINK: function LINK(children, data, _ref14) {
-      var key = _ref14.key;
-      return _react2.default.createElement(
-        _Link2.default,
-        { key: key, to: data.url },
-        children
-      );
-    },
-    BLOCK_ASSET: function BLOCK_ASSET(children, data, _ref15) {
-      var key = _ref15.key;
+  entities: (_entities = {}, (0, _defineProperty3.default)(_entities, LINK, function (children, data, _ref14) {
+    var key = _ref14.key;
+    return _react2.default.createElement(
+      _Link2.default,
+      { key: key, to: data.url },
+      children
+    );
+  }), (0, _defineProperty3.default)(_entities, BLOCK_ASSET, function (children, data, _ref15) {
+    var key = _ref15.key;
 
-      return _react2.default.createElement(_BlockAssetWrapper2.default, { key: key, data: data });
-    },
-    INLINE_ASSET: function INLINE_ASSET(children, data, _ref16) {
-      var key = _ref16.key;
+    return _react2.default.createElement(_BlockAssetWrapper2.default, { key: key, data: data });
+  }), (0, _defineProperty3.default)(_entities, INLINE_ASSET, function (children, data, _ref16) {
+    var key = _ref16.key;
 
-      return _react2.default.createElement(_InlineAssetWrapper2.default, { data: data, key: key });
-    },
-    NOTE_POINTER: function NOTE_POINTER(children, data, _ref17) {
-      var key = _ref17.key;
+    return _react2.default.createElement(_InlineAssetWrapper2.default, { data: data, key: key });
+  }), (0, _defineProperty3.default)(_entities, NOTE_POINTER, function (children, data, _ref17) {
+    var key = _ref17.key;
 
-      return _react2.default.createElement(_NotePointer2.default, { key: key, children: children, noteId: data.noteId });
-    }
-  }
+    return _react2.default.createElement(_NotePointer2.default, { key: key, children: children, noteId: data.noteId });
+  }), (0, _defineProperty3.default)(_entities, SECTION_POINTER, function (children, data, _ref18) {
+    var key = _ref18.key;
+
+    return _react2.default.createElement(_SectionPointer2.default, { key: key, children: children, noteId: data.noteId });
+  }), _entities)
 };
 
 /**
@@ -464,8 +484,8 @@ var Renderer = function (_Component) {
         return this.renderWarning();
       }
       if (notesMode === 'foot') {
-        renderers.entities.NOTE_POINTER = function (children, data, _ref18) {
-          var key = _ref18.key;
+        renderers.entities.NOTE_POINTER = function (children, data, _ref19) {
+          var key = _ref19.key;
 
           return _react2.default.createElement(_Footnote2.default, { key: key, children: children, noteId: data.noteId });
         };
@@ -907,10 +927,16 @@ exports.default = function (_ref) {
 /* 17 */
 /***/ (function(module, exports) {
 
-module.exports = require("redraft");
+module.exports = require("babel-runtime/helpers/defineProperty");
 
 /***/ }),
 /* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("redraft");
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -969,7 +995,7 @@ Link.propTypes = {
 exports.default = Link;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1102,7 +1128,7 @@ BlockAssetWrapper.contextTypes = {
 exports.default = BlockAssetWrapper;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1177,7 +1203,7 @@ InlineAssetWrapper.contextTypes = {
 exports.default = InlineAssetWrapper;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1198,7 +1224,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Renders a not pointer as a pure component
+ * Renders a note pointer as a pure component
  * @param {object} props
  * @param {array} props.children - children elements of the component
  * @param {array} props.noteId - the id of the note to point to
@@ -1274,7 +1300,7 @@ NotePointer.contextTypes = {
 exports.default = NotePointer;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1292,7 +1318,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _FootnoteRenderer = __webpack_require__(33);
+var _FootnoteRenderer = __webpack_require__(35);
 
 var _FootnoteRenderer2 = _interopRequireDefault(_FootnoteRenderer);
 
@@ -1362,7 +1388,7 @@ Footnote.contextTypes = {
 exports.default = Footnote;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1480,7 +1506,7 @@ Section.childContextTypes = {
 };
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1490,11 +1516,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Template = __webpack_require__(25);
+var _Template = __webpack_require__(26);
 
 var _Template2 = _interopRequireDefault(_Template);
 
-var _DecoratedSection = __webpack_require__(38);
+var _DecoratedSection = __webpack_require__(40);
 
 var _DecoratedSection2 = _interopRequireDefault(_DecoratedSection);
 
@@ -1514,13 +1540,13 @@ var _EndNotes = __webpack_require__(16);
 
 var _EndNotes2 = _interopRequireDefault(_EndNotes);
 
-var _DecoratedEndNotes = __webpack_require__(39);
+var _DecoratedEndNotes = __webpack_require__(41);
 
 var _DecoratedEndNotes2 = _interopRequireDefault(_DecoratedEndNotes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var stylesheet = __webpack_require__(40);
+var stylesheet = __webpack_require__(42);
 
 var metadata = {
   name: 'codex garlic',
@@ -1583,7 +1609,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1638,27 +1664,27 @@ var _reactCiteproc = __webpack_require__(9);
 
 var _peritextRenderingUtils = __webpack_require__(6);
 
-var _Head = __webpack_require__(26);
+var _Head = __webpack_require__(27);
 
 var _Head2 = _interopRequireDefault(_Head);
 
-var _LayoutProvider = __webpack_require__(27);
+var _LayoutProvider = __webpack_require__(28);
 
 var _LayoutProvider2 = _interopRequireDefault(_LayoutProvider);
 
-var _FrontCover = __webpack_require__(29);
+var _FrontCover = __webpack_require__(30);
 
 var _FrontCover2 = _interopRequireDefault(_FrontCover);
 
-var _SecondFront = __webpack_require__(30);
+var _SecondFront = __webpack_require__(31);
 
 var _SecondFront2 = _interopRequireDefault(_SecondFront);
 
-var _BackCover = __webpack_require__(31);
+var _BackCover = __webpack_require__(32);
 
 var _BackCover2 = _interopRequireDefault(_BackCover);
 
-var _TableOfContents = __webpack_require__(32);
+var _TableOfContents = __webpack_require__(33);
 
 var _TableOfContents2 = _interopRequireDefault(_TableOfContents);
 
@@ -1678,19 +1704,19 @@ var _EndNotes = __webpack_require__(16);
 
 var _EndNotes2 = _interopRequireDefault(_EndNotes);
 
-var _DefaultLinkComponent = __webpack_require__(35);
+var _DefaultLinkComponent = __webpack_require__(37);
 
 var _DefaultLinkComponent2 = _interopRequireDefault(_DefaultLinkComponent);
 
-var _DefaultMentionComponent = __webpack_require__(36);
+var _DefaultMentionComponent = __webpack_require__(38);
 
 var _DefaultMentionComponent2 = _interopRequireDefault(_DefaultMentionComponent);
 
-var _Section = __webpack_require__(23);
+var _Section = __webpack_require__(24);
 
 var _Section2 = _interopRequireDefault(_Section);
 
-var _defaultLocales = __webpack_require__(37);
+var _defaultLocales = __webpack_require__(39);
 
 var _defaultLocales2 = _interopRequireDefault(_defaultLocales);
 
@@ -1886,7 +1912,7 @@ Template.childContextTypes = {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1945,7 +1971,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1994,7 +2020,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _garlic = __webpack_require__(28);
+var _garlic = __webpack_require__(29);
 
 var _garlic2 = _interopRequireDefault(_garlic);
 
@@ -2083,13 +2109,13 @@ LayoutProvider.childContextTypes = {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
-module.exports = "@charset \"UTF-8\";\n/**\n * Template-specific reusable elements (variables, mixins, abstract classes)\n */\nbody {\n  font-family: Merriweather, serif;\n  color: #414E4D;\n  text-rendering: optimizeLegibility; }\n\n* {\n  prince-footnote-policy: keep-with-block;\n  prince-bookmark-label: none;\n  quotes: \"« \" \" »\"; }\n\np {\n  text-indent: 0.833rem; }\n\np,\nli,\npre,\nblockquote {\n  line-height: 0.9996rem;\n  font-size: 0.72rem;\n  page-break-inside: avoid;\n  orphans: 3;\n  widows: 3;\n  text-align: justify;\n  text-justify: inter-word; }\n\nli {\n  margin-bottom: 0.833rem; }\n\nfigure {\n  font-size: 0.45rem; }\n\nfigcaption {\n  font-size: 0.45rem;\n  padding: 0.833rem;\n  page-break-inside: avoid;\n  orphans: 3;\n  widows: 3; }\n  figcaption * {\n    padding: 0; }\n\na {\n  color: inherit;\n  text-decoration: none;\n  border-bottom: 1px solid #F32E36; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: Roboto, serif;\n  page-break-inside: avoid; }\n\n.section-title {\n  font-size: 2.94912rem; }\n\nh1 {\n  font-size: 1.8432rem; }\n\nh2 {\n  font-size: 1.152rem; }\n\nh3 {\n  font-size: 0.72rem; }\n\n.block-contextualization-container,\nsvg,\nimg {\n  max-width: 100%;\n  overflow: hidden; }\n\n/**\n * Notes styling\n */\n.footnote {\n  display: prince-footnote;\n  counter-increment: footnote;\n  footnote-display: inline; }\n\n.footnote-content {\n  font-size: 0.45rem; }\n  .footnote-content .footnote-p,\n  .footnote-content .footnote-h1,\n  .footnote-content .footnote-h2,\n  .footnote-content .footnote-h3,\n  .footnote-content .footnote-h4,\n  .footnote-content .footnote-h5,\n  .footnote-content .footnote-h6,\n  .footnote-content .footnote-ul,\n  .footnote-content .footnote-ol,\n  .footnote-content .footnote-li,\n  .footnote-content .footnote-pre,\n  .footnote-content .footnote-blockquote {\n    display: block; }\n  .footnote-content .footnote-p {\n    text-indent: 0.5rem; }\n  .footnote-content .footnote-h1,\n  .footnote-content .footnote-h2,\n  .footnote-content .footnote-h3,\n  .footnote-content .footnote-h4,\n  .footnote-content .footnote-h5,\n  .footnote-content .footnote-h6 {\n    font-size: 0.72rem; }\n\n.footnote::footnote-call {\n  content: counter(footnote);\n  font-size: 83%;\n  vertical-align: super;\n  line-height: none; }\n\n@page {\n  padding: 1.5cm;\n  padding-top: 1cm;\n  @footnotes {\n    padding-top: 0.5rem; } }\n\nimg {\n  width: 9999em;\n  max-width: 100%;\n  height: auto;\n  max-height: 100%; }\n\n@page {\n  @bottom {\n    content: counter(page); } }\n\n.table-of-contents-container a::after,\n.table-of-figures-container a::after {\n  content: leader(\".\") target-counter(attr(href), page); }\n\n.page-link {\n  content: target-counter(attr(href), page); }\n\n.separate-pages {\n  page-break-before: always;\n  page-break-after: always; }\n\n.empty-page {\n  page-break-after: always;\n  page: empty-page; }\n\n@page empty-page {\n  @bottom {\n    content: none; } }\n\n.bookmark-level-0 {\n  prince-bookmark-level: 1; }\n\n.bookmark-level-1 {\n  prince-bookmark-level: 2; }\n\n.bookmark-level-2 {\n  prince-bookmark-level: 3; }\n\n.bookmark-level-3 {\n  prince-bookmark-level: 4; }\n\n.bookmark-level-4 {\n  prince-bookmark-level: 5; }\n\n.bookmark-level-5 {\n  prince-bookmark-level: 6; }\n\n.bookmark-level-6 {\n  prince-bookmark-level: 7; }\n\n.bookmark-title {\n  prince-bookmark-label: attr(title); }\n\n/**\n * Cover styling\n */\n#front-cover {\n  page: front-cover; }\n\n.front-cover-container {\n  page-break-after: always;\n  page-break-before: never;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  justify-contents: center; }\n  .front-cover-container.with-image .cover-content {\n    display: none; }\n  .front-cover-container .cover-content {\n    padding: 5cm; }\n    .front-cover-container .cover-content h1, .front-cover-container .cover-content h2, .front-cover-container .cover-content h3 {\n      color: #414E4D;\n      background: #FDFFF8;\n      padding: 0.833rem;\n      display: inline-block; }\n    .front-cover-container .cover-content h1 {\n      font-size: 2.94912rem; }\n\n@page front-cover {\n  background: #414E4D;\n  color: #FDFFF8; }\n\n#cover-image {\n  position: absolute;\n  min-height: 100%;\n  min-width: 100%; }\n\n.cover-content {\n  position: absolute;\n  left: 1rem;\n  top: 1rem; }\n\n@page :first {\n  margin: 0;\n  page-break-after: always;\n  padding: 0;\n  @bottom {\n    content: none; } }\n\n.second-front-cover-container {\n  text-align: center;\n  padding-top: 10cm;\n  page: second-front; }\n  .second-front-cover-container h1, .second-front-cover-container h2, .second-front-cover-container h3 {\n    font-family: Merriweather, serif; }\n\n@page second-front {\n  @bottom {\n    content: none; } }\n\n@page back-cover {\n  margin: 0;\n  page-break-before: always;\n  background: #414E4D;\n  color: #FDFFF8;\n  padding: 5cm;\n  @bottom {\n    content: none; } }\n\n.back-cover-container {\n  page: back-cover;\n  page-break-before: always;\n  font-size: 1.8432rem; }\n  .back-cover-container p {\n    font-size: 0.72rem; }\n  .back-cover-container p, .back-cover-container h2, .back-cover-container h3 {\n    color: #FDFFF8; }\n  .back-cover-container .peritext-static-back-subtitle {\n    font-style: italic;\n    margin-left: 0.833rem; }\n\n.table-of-contents {\n  page: table-of-contents; }\n\n/**\n * Special pages\n */\n.mentions-container {\n  padding: 0;\n  margin: 0; }\n  .mentions-container ul, .mentions-container ol {\n    padding: 0;\n    margin: 0; }\n  .mentions-container li {\n    list-style-type: none;\n    padding: 0;\n    margin-bottom: 0.833rem; }\n  .mentions-container .mentions-list {\n    font-size: 0.45rem;\n    margin-top: 0.5rem;\n    font-style: italic;\n    text-indent: 0.5rem; }\n\n/**\n * Fix for citations numbering\n */\n.csl-left-margin,\n.csl-right-inline {\n  display: inline-block; }\n\n.end-notes {\n  padding: 0;\n  margin: 0; }\n  .end-notes li {\n    margin: 0;\n    padding: 0;\n    margin-bottom: 0.833rem;\n    list-style-type: none; }\n    .end-notes li > div {\n      margin-top: -1.08rem;\n      margin-left: 0.833rem; }\n\n/**\n * Figures\n */\ntable {\n  max-width: 100%;\n  font-size: 0.45rem;\n  font-family: Roboto, serif;\n  text-align: left;\n  width: 90%;\n  border-collapse: collapse;\n  border: solid 1px #414E4D;\n  font-weight: 200; }\n\ntable thead tr {\n  background: #414E4D;\n  color: white; }\n\ntable tbody tr:nth-child(even) {\n  background: #FDFFF8; }\n\ntable th {\n  border: solid 1px #414E4D;\n  padding: 0.5rem; }\n\n/**\n * Contextualizers setting\n */\n.peritext-contextualizer-codefiles {\n  font-family: monospace; }\n  .peritext-contextualizer-codefiles pre {\n    counter-reset: line; }\n  .peritext-contextualizer-codefiles .code-line {\n    display: block;\n    line-height: 0.833rem; }\n    .peritext-contextualizer-codefiles .code-line:before {\n      width: 0.833rem;\n      text-align: right;\n      counter-increment: line;\n      content: counter(line);\n      display: inline-block;\n      border-right: 1px solid #ddd;\n      padding: 0 .5em;\n      margin-right: .5em;\n      color: #888; }\n"
+module.exports = "@charset \"UTF-8\";\n/**\n * Template-specific reusable elements (variables, mixins, abstract classes)\n */\nbody {\n  font-family: Merriweather, serif;\n  color: #414E4D;\n  text-rendering: optimizeLegibility; }\n\n* {\n  prince-footnote-policy: keep-with-block;\n  prince-bookmark-label: none;\n  quotes: \"« \" \" »\"; }\n\np {\n  text-indent: 0.833rem; }\n\np,\nli,\npre,\nblockquote {\n  line-height: 0.9996rem;\n  font-size: 0.72rem;\n  page-break-inside: avoid;\n  orphans: 3;\n  widows: 3;\n  text-align: justify;\n  text-justify: inter-word; }\n\nli {\n  margin-bottom: 0.833rem; }\n\nfigure {\n  font-size: 0.45rem; }\n\nfigcaption {\n  font-size: 0.45rem;\n  padding: 0.833rem;\n  page-break-inside: avoid;\n  orphans: 3;\n  widows: 3; }\n  figcaption * {\n    padding: 0; }\n\na {\n  color: inherit;\n  text-decoration: none;\n  border-bottom: 1px solid #F32E36; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: Roboto, serif;\n  page-break-inside: avoid; }\n\n.section-title {\n  font-size: 2.94912rem; }\n\nh1 {\n  font-size: 1.8432rem; }\n\nh2 {\n  font-size: 1.152rem; }\n\nh3 {\n  font-size: 0.72rem; }\n\n.block-contextualization-container,\nsvg,\nimg {\n  max-width: 100%;\n  overflow: hidden; }\n\n/**\n * Notes styling\n */\n.footnote {\n  display: prince-footnote;\n  counter-increment: footnote;\n  footnote-display: inline; }\n\n.footnote-content {\n  font-size: 0.45rem; }\n  .footnote-content .footnote-p,\n  .footnote-content .footnote-h1,\n  .footnote-content .footnote-h2,\n  .footnote-content .footnote-h3,\n  .footnote-content .footnote-h4,\n  .footnote-content .footnote-h5,\n  .footnote-content .footnote-h6,\n  .footnote-content .footnote-ul,\n  .footnote-content .footnote-ol,\n  .footnote-content .footnote-li,\n  .footnote-content .footnote-pre,\n  .footnote-content .footnote-blockquote {\n    display: block; }\n  .footnote-content .footnote-p {\n    text-indent: 0.5rem; }\n  .footnote-content .footnote-h1,\n  .footnote-content .footnote-h2,\n  .footnote-content .footnote-h3,\n  .footnote-content .footnote-h4,\n  .footnote-content .footnote-h5,\n  .footnote-content .footnote-h6 {\n    font-size: 0.72rem; }\n\n.footnote::footnote-call {\n  content: counter(footnote);\n  font-size: 83%;\n  vertical-align: super;\n  line-height: none; }\n\n@page {\n  padding: 1.5cm;\n  padding-top: 1cm;\n  @footnotes {\n    padding-top: 0.5rem; } }\n\nimg {\n  width: 9999em;\n  max-width: 100%;\n  height: auto;\n  max-height: 100%; }\n\n@page {\n  @bottom {\n    content: counter(page); } }\n\n.table-of-contents-container a::after,\n.table-of-figures-container a::after {\n  content: leader(\".\") target-counter(attr(href), page); }\n\n.page-link {\n  content: target-counter(attr(href), page); }\n\n.separate-pages {\n  page-break-after: always; }\n\n.empty-page {\n  page-break-after: always;\n  page: empty-page; }\n\n@page empty-page {\n  @bottom {\n    content: none; } }\n\n.bookmark-level-0 {\n  prince-bookmark-level: 1; }\n\n.bookmark-level-1 {\n  prince-bookmark-level: 2; }\n\n.bookmark-level-2 {\n  prince-bookmark-level: 3; }\n\n.bookmark-level-3 {\n  prince-bookmark-level: 4; }\n\n.bookmark-level-4 {\n  prince-bookmark-level: 5; }\n\n.bookmark-level-5 {\n  prince-bookmark-level: 6; }\n\n.bookmark-level-6 {\n  prince-bookmark-level: 7; }\n\n.bookmark-title {\n  prince-bookmark-label: attr(title); }\n\n/**\n * Cover styling\n */\n#front-cover {\n  page: front-cover; }\n\n.front-cover-container {\n  page-break-after: always;\n  page-break-before: never;\n  display: flex;\n  flex-flow: column nowrap;\n  align-items: center;\n  justify-contents: center; }\n  .front-cover-container.with-image .cover-content {\n    display: none; }\n  .front-cover-container .cover-content {\n    padding: 5cm; }\n    .front-cover-container .cover-content h1, .front-cover-container .cover-content h2, .front-cover-container .cover-content h3 {\n      color: #414E4D;\n      background: #FDFFF8;\n      padding: 0.833rem;\n      display: inline-block; }\n    .front-cover-container .cover-content h1 {\n      font-size: 2.94912rem; }\n\n@page front-cover {\n  background: #414E4D;\n  color: #FDFFF8; }\n\n#cover-image {\n  position: absolute;\n  min-height: 100%;\n  min-width: 100%; }\n\n.cover-content {\n  position: absolute;\n  left: 1rem;\n  top: 1rem; }\n\n@page :first {\n  margin: 0;\n  page-break-after: always;\n  padding: 0;\n  @bottom {\n    content: none; } }\n\n.second-front-cover-container {\n  text-align: center;\n  padding-top: 10cm;\n  page: second-front; }\n  .second-front-cover-container h1, .second-front-cover-container h2, .second-front-cover-container h3 {\n    font-family: Merriweather, serif; }\n\n@page second-front {\n  @bottom {\n    content: none; } }\n\n@page back-cover {\n  margin: 0;\n  page-break-before: always;\n  background: #414E4D;\n  color: #FDFFF8;\n  padding: 5cm;\n  @bottom {\n    content: none; } }\n\n.back-cover-container {\n  page: back-cover;\n  page-break-before: always;\n  font-size: 1.8432rem; }\n  .back-cover-container p {\n    font-size: 0.72rem; }\n  .back-cover-container p, .back-cover-container h2, .back-cover-container h3 {\n    color: #FDFFF8; }\n  .back-cover-container .peritext-static-back-subtitle {\n    font-style: italic;\n    margin-left: 0.833rem; }\n\n.table-of-contents {\n  page: table-of-contents; }\n\n/**\n * Special pages\n */\n.mentions-container {\n  padding: 0;\n  margin: 0; }\n  .mentions-container ul, .mentions-container ol {\n    padding: 0;\n    margin: 0; }\n  .mentions-container li {\n    list-style-type: none;\n    padding: 0;\n    margin-bottom: 0.833rem; }\n  .mentions-container .mentions-list {\n    font-size: 0.45rem;\n    margin-top: 0.5rem;\n    font-style: italic;\n    text-indent: 0.5rem; }\n\n/**\n * Fix for citations numbering\n */\n.csl-left-margin,\n.csl-right-inline {\n  display: inline-block; }\n\n.end-notes {\n  padding: 0;\n  margin: 0; }\n  .end-notes li {\n    margin: 0;\n    padding: 0;\n    margin-bottom: 0.833rem;\n    list-style-type: none; }\n    .end-notes li > div {\n      margin-top: -1.08rem;\n      margin-left: 0.833rem; }\n\n/**\n * Figures\n */\ntable {\n  max-width: 100%;\n  font-size: 0.45rem;\n  font-family: Roboto, serif;\n  text-align: left;\n  width: 90%;\n  border-collapse: collapse;\n  border: solid 1px #414E4D;\n  font-weight: 200; }\n\ntable thead tr {\n  background: #414E4D;\n  color: white; }\n\ntable tbody tr:nth-child(even) {\n  background: #FDFFF8; }\n\ntable th {\n  border: solid 1px #414E4D;\n  padding: 0.5rem; }\n\n/**\n * Contextualizers setting\n */\n.peritext-contextualizer-codefiles {\n  font-family: monospace; }\n  .peritext-contextualizer-codefiles pre {\n    counter-reset: line; }\n  .peritext-contextualizer-codefiles .code-line {\n    display: block;\n    line-height: 0.833rem; }\n    .peritext-contextualizer-codefiles .code-line:before {\n      width: 0.833rem;\n      text-align: right;\n      counter-increment: line;\n      content: counter(line);\n      display: inline-block;\n      border-right: 1px solid #ddd;\n      padding: 0 .5em;\n      margin-right: .5em;\n      color: #888; }\n"
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2147,7 +2173,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2204,7 +2230,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2268,7 +2294,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2330,7 +2356,104 @@ exports.default = function (_ref2) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Renders a section pointer as a pure component
+ * @param {object} props
+ * @param {array} props.children - children elements of the component
+ * @param {array} props.sectionId - the id of the section to point to
+ * @param {object} context - the context data of the component
+ * @return {ReactElement} component - the component
+ */
+/**
+ * This module exports a stateless reusable section pointer component
+ * ============
+ * @module quinoa-story-player/components/SectionPointer
+ */
+var SectionPointer = function SectionPointer(_ref, context) {
+  var children = _ref.children,
+      _ref$sectionId = _ref.sectionId,
+      sectionId = _ref$sectionId === undefined ? '' : _ref$sectionId;
+
+  var sections = context.sections;
+  var SectionLinkComponent = context.SectionLinkComponent;
+  if (sections) {
+    var section = sections[sectionId];
+    if (section) {
+      return _react2.default.createElement(
+        'span',
+        { className: 'section-pointer', id: 'section-pointer-' + sectionId },
+        SectionLinkComponent ? _react2.default.createElement(
+          SectionLinkComponent,
+          { href: '#section-content-' + sectionId },
+          section.order,
+          children
+        ) : _react2.default.createElement(
+          'a',
+          { href: '#section-content-' + sectionId },
+          section.order,
+          children
+        )
+      );
+    }
+    return null;
+  }
+  return null;
+};
+
+/**
+ * Component's properties types
+ */
+SectionPointer.propTypes = {
+  /**
+   * Children react components
+   */
+  children: _propTypes2.default.array,
+  /**
+   * id of the section to render
+   */
+  sectionId: _propTypes2.default.string
+};
+
+/**
+ * Component's context used properties
+ */
+SectionPointer.contextTypes = {
+  /**
+   * Map of available sections to look into
+   */
+  sections: _propTypes2.default.object,
+  /**
+   * Triggers a callback upstream when the pointer is clicked
+   */
+  onNoteContentPointerClick: _propTypes2.default.func,
+
+  SectionLinkComponent: _propTypes2.default.func
+};
+
+exports.default = SectionPointer;
+
+/***/ }),
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2360,7 +2483,7 @@ var _inherits2 = __webpack_require__(5);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _defineProperty2 = __webpack_require__(34);
+var _defineProperty2 = __webpack_require__(17);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -2372,27 +2495,27 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _redraft = __webpack_require__(17);
+var _redraft = __webpack_require__(18);
 
 var _redraft2 = _interopRequireDefault(_redraft);
 
-var _Link = __webpack_require__(18);
+var _Link = __webpack_require__(19);
 
 var _Link2 = _interopRequireDefault(_Link);
 
-var _BlockAssetWrapper = __webpack_require__(19);
+var _BlockAssetWrapper = __webpack_require__(20);
 
 var _BlockAssetWrapper2 = _interopRequireDefault(_BlockAssetWrapper);
 
-var _InlineAssetWrapper = __webpack_require__(20);
+var _InlineAssetWrapper = __webpack_require__(21);
 
 var _InlineAssetWrapper2 = _interopRequireDefault(_InlineAssetWrapper);
 
-var _NotePointer = __webpack_require__(21);
+var _NotePointer = __webpack_require__(22);
 
 var _NotePointer2 = _interopRequireDefault(_NotePointer);
 
-var _Footnote = __webpack_require__(22);
+var _Footnote = __webpack_require__(23);
 
 var _Footnote2 = _interopRequireDefault(_Footnote);
 
@@ -2696,13 +2819,31 @@ Renderer.propTypes = {
 exports.default = Renderer;
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports) {
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("babel-runtime/helpers/defineProperty");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+
+var constants = {
+  entities: {
+    LINK: 'LINK',
+    BLOCK_ASSET: 'BLOCK_ASSET',
+    INLINE_ASSET: 'INLINE_ASSET',
+    NOTE_POINTER: 'NOTE_POINTER',
+    SECTION_POINTER: 'SECTION_POINTER'
+  }
+};
+
+exports.default = constants;
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2733,7 +2874,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2765,7 +2906,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2784,7 +2925,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2823,7 +2964,7 @@ var _reactCiteproc = __webpack_require__(9);
 
 var _peritextRenderingUtils = __webpack_require__(6);
 
-var _Section = __webpack_require__(23);
+var _Section = __webpack_require__(24);
 
 var _Section2 = _interopRequireDefault(_Section);
 
@@ -2895,7 +3036,7 @@ DecoratedSection.childContextTypes = {
 };
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3053,7 +3194,7 @@ DecoratedEndNotes.contextTypes = {
 };
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

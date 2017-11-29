@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * Renders a not pointer as a pure component
+ * Renders a note pointer as a pure component
  * @param {object} props
  * @param {array} props.children - children elements of the component
  * @param {array} props.noteId - the id of the note to point to

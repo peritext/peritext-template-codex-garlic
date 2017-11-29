@@ -132,7 +132,6 @@ img {
   content: target-counter(attr(href), page); }
 
 .separate-pages {
-  page-break-before: always;
   page-break-after: always; }
 
 .empty-page {

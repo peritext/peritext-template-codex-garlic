@@ -1,9 +1,14 @@
 const path = require('path');
+const fs = require('fs');
 const generatePdf = require('peritext-generator-pdf');
+const generateEpub = require('peritext-generator-epub');
 const template = require('./dist/index');
 const story1 = require('./examples/story-1');
 const story2 = require('./examples/story-2');
+const storyLinks = require('./examples/story-links');
 const exampleLocale = require('./example-locale');
+
+const templateCss = fs.readFileSync(__dirname + '/dist/main.css', 'utf8');
 
 const contextualizers = {
   bib: require('peritext-contextualizer-bib'),
@@ -20,19 +25,22 @@ const contextualizers = {
   'data-presentation': require('peritext-contextualizer-data-presentation'),
 };
 
-generatePdf({
-  story: story1,
-  contextualizers,
-  template: template,
-  locale: exampleLocale,
-  tempDirPath: path.resolve(__dirname + '/temp'),
-  outputDirPath: path.resolve(__dirname + '/examples')
-});
-generatePdf({
-  story: story2,
-  contextualizers,
-  template: template,
-  locale: exampleLocale,
-  tempDirPath: path.resolve(__dirname + '/temp'),
-  outputDirPath: path.resolve(__dirname + '/examples')
-});
+const stories = [story1, story2, storyLinks].reduce((p, story) => 
+  new Promise((resolve, reject) => {
+    generateEpub({
+      story: story1,
+      contextualizers,
+      template: template,
+      locale: exampleLocale,
+      additionalStylesheets: [
+        templateCss
+      ],
+      tempDirPath: path.resolve(__dirname + '/temp'),
+      outputDirPath: path.resolve(__dirname + '/examples')
+    }, (err) => {
+      if (err) {
+        reject(err);
+      } else resolve(null);
+    });
+  }),
+  Promise.resolve());
