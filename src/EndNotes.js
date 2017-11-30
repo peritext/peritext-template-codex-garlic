@@ -31,7 +31,7 @@ export default ({
               <a href={`#note-pointer-${note.id}`} className="note-number">
                 {index + 1}
               </a>
-              <Renderer raw={note.editorState} />
+              <Renderer raw={note.contents} />
             </li>
           )
         })

@@ -27,7 +27,7 @@ const Footnote = ({
       return (
         <sup className="footnote" id={`note-pointer-${noteId}`}>
           <span className="footnote-content">
-            <Renderer raw={note.editorState} />
+            <Renderer raw={note.contents} />
           </span>
         </sup>
       );

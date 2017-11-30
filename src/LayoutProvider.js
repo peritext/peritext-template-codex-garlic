@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import stylesheet from '!raw-loader!sass-loader!./garlic.scss';
+import templateStylesheet from '!raw-loader!sass-loader!./garlic.scss';
 
 export default class LayoutProvider extends Component{
   constructor(props) {
@@ -32,17 +32,24 @@ export default class LayoutProvider extends Component{
       contextualizers = {}
     } = props;
 
-    const contextualizersStyles = Object.keys(contextualizers)
-      .map(type => contextualizers[type] && contextualizers[type].defaultCss)
+    const styleMode = settings.css && settings.css.codex && settings.css.codex.mode ? settings.css.codex.mode : 'merge';
+    if (styleMode === 'merge') {
+      const contextualizersStyles = Object.keys(contextualizers)
+        .map(type => contextualizers[type] && contextualizers[type].defaultCss)
+        .join('\n');
+
+      const storyStyles = settings.css && settings.css.codex && settings.css.codex.css ? settings.css.codex.css : '';
+      
+      return [
+        templateStylesheet, 
+        ...contextualizersStyles, 
+        storyStyles
+      ]
       .join('\n');
-    const storyStyles = story.settings.css && story.settings.css.codex ? story.settings.css.codex : '';
+    } else { // styleMode === 'replace'
+      return storyStyles;
+    }
     
-    return [
-      stylesheet, 
-      ...contextualizersStyles, 
-      storyStyles
-    ]
-    .join('\n');
   }
 
   render = () => {

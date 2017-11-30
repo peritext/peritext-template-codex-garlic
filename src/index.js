@@ -74,6 +74,7 @@ export default {
   Glossary,
   AuthorsIndex,
   metadata,
+  stylesheet,
   typefaceNames: ['roboto', 'merriweather']
 };
 

@@ -914,7 +914,7 @@ exports.default = function (_ref) {
             { href: '#note-pointer-' + note.id, className: 'note-number' },
             index + 1
           ),
-          _react2.default.createElement(_Renderer2.default, { raw: note.editorState })
+          _react2.default.createElement(_Renderer2.default, { raw: note.contents })
         );
       })
     )
@@ -1351,7 +1351,7 @@ var Footnote = function Footnote(_ref, context) {
         _react2.default.createElement(
           'span',
           { className: 'footnote-content' },
-          _react2.default.createElement(_FootnoteRenderer2.default, { raw: note.editorState })
+          _react2.default.createElement(_FootnoteRenderer2.default, { raw: note.contents })
         )
       );
     }
@@ -1524,7 +1524,7 @@ var _Template = __webpack_require__(27);
 
 var _Template2 = _interopRequireDefault(_Template);
 
-var _DecoratedSection = __webpack_require__(40);
+var _DecoratedSection = __webpack_require__(41);
 
 var _DecoratedSection2 = _interopRequireDefault(_DecoratedSection);
 
@@ -1544,13 +1544,13 @@ var _EndNotes = __webpack_require__(16);
 
 var _EndNotes2 = _interopRequireDefault(_EndNotes);
 
-var _DecoratedEndNotes = __webpack_require__(41);
+var _DecoratedEndNotes = __webpack_require__(42);
 
 var _DecoratedEndNotes2 = _interopRequireDefault(_DecoratedEndNotes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var stylesheet = __webpack_require__(42);
+var stylesheet = __webpack_require__(43);
 
 var metadata = {
   name: 'codex garlic',
@@ -1609,6 +1609,7 @@ exports.default = {
   Glossary: _Glossary2.default,
   AuthorsIndex: _AuthorsIndex2.default,
   metadata: metadata,
+  stylesheet: stylesheet,
   typefaceNames: ['roboto', 'merriweather']
 };
 
@@ -1716,21 +1717,24 @@ var _DefaultMentionComponent = __webpack_require__(38);
 
 var _DefaultMentionComponent2 = _interopRequireDefault(_DefaultMentionComponent);
 
+var _DefaultSectionLinkComponent = __webpack_require__(39);
+
+var _DefaultSectionLinkComponent2 = _interopRequireDefault(_DefaultSectionLinkComponent);
+
 var _Section = __webpack_require__(25);
 
 var _Section2 = _interopRequireDefault(_Section);
 
-var _defaultLocales = __webpack_require__(39);
+var _defaultLocales = __webpack_require__(40);
 
 var _defaultLocales2 = _interopRequireDefault(_defaultLocales);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import NotesContainer from '../components/NotesContainer';
-
 var EmptyPage = function EmptyPage() {
   return _react2.default.createElement('div', { className: 'empty-page' });
 };
+// import NotesContainer from '../components/NotesContainer';
 
 var Template = function (_Component) {
   (0, _inherits3.default)(Template, _Component);
@@ -1746,8 +1750,7 @@ var Template = function (_Component) {
       return {
         LinkComponent: this.props.LinkComponent || _DefaultLinkComponent2.default,
         MentionComponent: this.props.MentionComponent || _DefaultMentionComponent2.default,
-        SectionLinkComponent: this.props.SectionLinkComponent || DefaultSectionLinkComponent
-
+        SectionLinkComponent: this.props.SectionLinkComponent || _DefaultSectionLinkComponent2.default
       };
     }
   }, {
@@ -1770,7 +1773,7 @@ var Template = function (_Component) {
           _story$metadata$url = _story$metadata.url,
           url = _story$metadata$url === undefined ? '' : _story$metadata$url,
           _story$settings = story.settings,
-          codex = _story$settings.css.codex,
+          css = _story$settings.css.codex.css,
           _story$settings$displ = _story$settings.displayFrontCodexCover,
           displayFrontCodexCover = _story$settings$displ === undefined ? true : _story$settings$displ,
           _story$settings$displ2 = _story$settings.displayBackCodexCover,
@@ -1900,7 +1903,7 @@ var Template = function (_Component) {
           _react2.default.createElement(
             'style',
             null,
-            codex
+            css
           )
         )
       );
@@ -2079,12 +2082,19 @@ var LayoutProvider = (_temp = _class = function (_Component) {
         contextualizers = _props$contextualizer === undefined ? {} : _props$contextualizer;
 
 
-    var contextualizersStyles = (0, _keys2.default)(contextualizers).map(function (type) {
-      return contextualizers[type] && contextualizers[type].defaultCss;
-    }).join('\n');
-    var storyStyles = story.settings.css && story.settings.css.codex ? story.settings.css.codex : '';
+    var styleMode = settings.css && settings.css.codex && settings.css.codex.mode ? settings.css.codex.mode : 'merge';
+    if (styleMode === 'merge') {
+      var contextualizersStyles = (0, _keys2.default)(contextualizers).map(function (type) {
+        return contextualizers[type] && contextualizers[type].defaultCss;
+      }).join('\n');
 
-    return [_garlic2.default].concat((0, _toConsumableArray3.default)(contextualizersStyles), [storyStyles]).join('\n');
+      var _storyStyles = settings.css && settings.css.codex && settings.css.codex.css ? settings.css.codex.css : '';
+
+      return [_garlic2.default].concat((0, _toConsumableArray3.default)(contextualizersStyles), [_storyStyles]).join('\n');
+    } else {
+      // styleMode === 'replace'
+      return storyStyles;
+    }
   };
 
   this.render = function () {
@@ -2904,6 +2914,38 @@ exports.default = function (_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+  var sectionId = _ref.sectionId,
+      target = _ref.target,
+      children = _ref.children,
+      className = _ref.className,
+      id = _ref.id,
+      style = _ref.style;
+  return _react2.default.createElement(
+    'a',
+    { href: '#' + sectionId, target: target, className: className, id: id, style: style },
+    children,
+    '*'
+  );
+};
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = {
   references: 'Références',
   tableOfContents: 'Sommaire',
@@ -2914,7 +2956,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3027,7 +3069,7 @@ DecoratedSection.childContextTypes = {
 };
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3160,7 +3202,7 @@ var DecoratedEndNotes = function (_Component) {
                   { sectionId: note.sectionId, href: '#note-pointer-' + note.id, className: 'note-number' },
                   index + 1
                 ),
-                _react2.default.createElement(_Renderer2.default, { raw: note.editorState })
+                _react2.default.createElement(_Renderer2.default, { raw: note.contents })
               );
             })
           )
@@ -3185,7 +3227,7 @@ DecoratedEndNotes.contextTypes = {
 };
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -69,7 +69,7 @@ export default class DecoratedEndNotes extends Component {
                     <LinkComponent sectionId={note.sectionId} href={`#note-pointer-${note.id}`} className="note-number">
                       {index + 1}
                     </LinkComponent>
-                    <Renderer raw={note.editorState} />
+                    <Renderer raw={note.contents} />
                   </li>
                 )
               })

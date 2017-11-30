@@ -28,7 +28,7 @@ const contextualizers = {
 const stories = [story1, story2, storyLinks].reduce((p, story) => 
   new Promise((resolve, reject) => {
     generateEpub({
-      story: story1,
+      story: story,
       contextualizers,
       template: template,
       locale: exampleLocale,

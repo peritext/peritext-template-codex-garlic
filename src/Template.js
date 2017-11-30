@@ -18,6 +18,7 @@ import AuthorsIndex from './AuthorsIndex';
 import EndNotes from './EndNotes';
 import DefaultLinkComponent from './DefaultLinkComponent';
 import DefaultMentionComponent from './DefaultMentionComponent';
+import DefaultSectionLinkComponent from './DefaultSectionLinkComponent';
 
 import Section from './Section';
 
@@ -38,7 +39,6 @@ export default class Template extends Component {
       LinkComponent: this.props.LinkComponent || DefaultLinkComponent,
       MentionComponent: this.props.MentionComponent || DefaultMentionComponent,
       SectionLinkComponent: this.props.SectionLinkComponent ||  DefaultSectionLinkComponent,
-
     };
   }
 
@@ -62,7 +62,9 @@ export default class Template extends Component {
       },
       settings: {
         css: {
-          codex
+          codex: {
+            css,
+          }
         },
         displayFrontCodexCover = true,
         displayBackCodexCover = true,
@@ -196,11 +198,11 @@ export default class Template extends Component {
             </section>
           </LayoutProvider>
           <style>
-            {codex}
+            {css}
           </style>
         </body>
       </html>
-    )
+    );
   }
 }
 
