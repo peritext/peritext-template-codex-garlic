@@ -2082,13 +2082,13 @@ var LayoutProvider = (_temp = _class = function (_Component) {
         contextualizers = _props$contextualizer === undefined ? {} : _props$contextualizer;
 
 
-    var styleMode = settings.css && settings.css.codex && settings.css.codex.mode ? settings.css.codex.mode : 'merge';
+    var styleMode = story.settings.css && story.settings.css.codex && story.settings.css.codex.mode ? story.settings.css.codex.mode : 'merge';
     if (styleMode === 'merge') {
       var contextualizersStyles = (0, _keys2.default)(contextualizers).map(function (type) {
         return contextualizers[type] && contextualizers[type].defaultCss;
       }).join('\n');
 
-      var _storyStyles = settings.css && settings.css.codex && settings.css.codex.css ? settings.css.codex.css : '';
+      var _storyStyles = story.settings.css && story.settings.css.codex && story.settings.css.codex.css ? story.settings.css.codex.css : '';
 
       return [_garlic2.default].concat((0, _toConsumableArray3.default)(contextualizersStyles), [_storyStyles]).join('\n');
     } else {

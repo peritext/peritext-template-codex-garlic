@@ -32,13 +32,13 @@ export default class LayoutProvider extends Component{
       contextualizers = {}
     } = props;
 
-    const styleMode = settings.css && settings.css.codex && settings.css.codex.mode ? settings.css.codex.mode : 'merge';
+    const styleMode = story.settings.css && story.settings.css.codex && story.settings.css.codex.mode ? story.settings.css.codex.mode : 'merge';
     if (styleMode === 'merge') {
       const contextualizersStyles = Object.keys(contextualizers)
         .map(type => contextualizers[type] && contextualizers[type].defaultCss)
         .join('\n');
 
-      const storyStyles = settings.css && settings.css.codex && settings.css.codex.css ? settings.css.codex.css : '';
+      const storyStyles = story.settings.css && story.settings.css.codex && story.settings.css.codex.css ? story.settings.css.codex.css : '';
       
       return [
         templateStylesheet, 

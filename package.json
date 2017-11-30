@@ -5,8 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist; mkdir dist; webpack",
-    "example": "npm run build;node example"
+    "example": "npm run build;node example",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "build",
+    "add-build"
+  ],
   "author": "Robin de Mourat",
   "license": "ISC",
   "peerDependencies": {
@@ -53,6 +58,7 @@
     "peritext-contextualizer-webpage": "0.0.8",
     "peritext-generator-pdf": "0.0.4",
     "peritext-rendering-utils": "0.0.19",
+    "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "react-dom": "^16.0.0",
     "sass-loader": "^6.0.6",
