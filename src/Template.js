@@ -36,6 +36,7 @@ export default class Template extends Component {
 
   getChildContext() {
     return {
+      datasets: this.props.story.datasets || {},
       LinkComponent: this.props.LinkComponent || DefaultLinkComponent,
       MentionComponent: this.props.MentionComponent || DefaultMentionComponent,
       SectionLinkComponent: this.props.SectionLinkComponent ||  DefaultSectionLinkComponent,
@@ -207,6 +208,7 @@ export default class Template extends Component {
 }
 
 Template.childContextTypes = {
+  datasets: PropTypes.object,
   LinkComponent: PropTypes.func,
   MentionComponent: PropTypes.func,
   SectionLinkComponent: PropTypes.func,

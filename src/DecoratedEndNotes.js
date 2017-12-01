@@ -14,6 +14,7 @@ export default class DecoratedEndNotes extends Component {
 
   getChildContext = () => ({
     contextualizers: this.props.contextualizers,
+    datasets: this.props.story.datasets,
     story: this.props.story,
   })
 
@@ -83,6 +84,7 @@ export default class DecoratedEndNotes extends Component {
 
 DecoratedEndNotes.childContextTypes = {
   story: PropTypes.object,
+  datasets: PropTypes.datasets,
   contextualizers: PropTypes.object,
   LinkComponent: PropTypes.func,
 }

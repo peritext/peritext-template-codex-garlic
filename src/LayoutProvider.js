@@ -21,6 +21,7 @@ export default class LayoutProvider extends Component{
 
   getChildContext = () => ({
     story: this.props.story,
+    datasets: this.props.story.datasets,
     contextualizers: this.props.contextualizers,
   })
 
@@ -78,5 +79,6 @@ LayoutProvider.propTypes = {
 
 LayoutProvider.childContextTypes = {
   story: PropTypes.object,
+  datasets: PropTypes.object,
   contextualizers: PropTypes.object,
 }

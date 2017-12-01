@@ -14,6 +14,7 @@ export default class DecoratedSection extends Component {
 
   getChildContext = () => ({
     story: this.props.story,
+    datasets: this.props.story.datasets,
     contextualizers: this.props.contextualizers,
     ReferenceLinkComponent: this.props.ReferenceLinkComponent || this.context.ReferenceLinkComponent,
     GlossaryLinkComponent: this.props.GlossaryLinkComponent || this.context.GlossaryLinkComponent,
@@ -55,6 +56,7 @@ DecoratedSection.contextTypes = {
 DecoratedSection.childContextTypes = {
   contextualizers: PropTypes.object,
   story: PropTypes.object,
+  datasets: PropTypes.object,
   ReferenceLinkComponent: PropTypes.func,
   GlossaryLinkComponent: PropTypes.func,
   NoteLinkComponent: PropTypes.func,

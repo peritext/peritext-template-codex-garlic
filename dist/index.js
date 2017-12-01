@@ -1748,6 +1748,7 @@ var Template = function (_Component) {
     key: 'getChildContext',
     value: function getChildContext() {
       return {
+        datasets: this.props.story.datasets || {},
         LinkComponent: this.props.LinkComponent || _DefaultLinkComponent2.default,
         MentionComponent: this.props.MentionComponent || _DefaultMentionComponent2.default,
         SectionLinkComponent: this.props.SectionLinkComponent || _DefaultSectionLinkComponent2.default
@@ -1916,6 +1917,7 @@ exports.default = Template;
 
 
 Template.childContextTypes = {
+  datasets: _propTypes2.default.object,
   LinkComponent: _propTypes2.default.func,
   MentionComponent: _propTypes2.default.func,
   SectionLinkComponent: _propTypes2.default.func
@@ -2069,6 +2071,7 @@ var LayoutProvider = (_temp = _class = function (_Component) {
   this.getChildContext = function () {
     return {
       story: _this2.props.story,
+      datasets: _this2.props.story.datasets,
       contextualizers: _this2.props.contextualizers
     };
   };
@@ -2122,6 +2125,7 @@ LayoutProvider.propTypes = {
 
 LayoutProvider.childContextTypes = {
   story: _propTypes2.default.object,
+  datasets: _propTypes2.default.object,
   contextualizers: _propTypes2.default.object
 };
 
@@ -3012,6 +3016,7 @@ var DecoratedSection = function (_Component) {
     _this.getChildContext = function () {
       return {
         story: _this.props.story,
+        datasets: _this.props.story.datasets,
         contextualizers: _this.props.contextualizers,
         ReferenceLinkComponent: _this.props.ReferenceLinkComponent || _this.context.ReferenceLinkComponent,
         GlossaryLinkComponent: _this.props.GlossaryLinkComponent || _this.context.GlossaryLinkComponent,
@@ -3062,6 +3067,7 @@ DecoratedSection.contextTypes = {
 DecoratedSection.childContextTypes = {
   contextualizers: _propTypes2.default.object,
   story: _propTypes2.default.object,
+  datasets: _propTypes2.default.object,
   ReferenceLinkComponent: _propTypes2.default.func,
   GlossaryLinkComponent: _propTypes2.default.func,
   NoteLinkComponent: _propTypes2.default.func,
@@ -3137,6 +3143,7 @@ var DecoratedEndNotes = function (_Component) {
     _this.getChildContext = function () {
       return {
         contextualizers: _this.props.contextualizers,
+        datasets: _this.props.story.datasets,
         story: _this.props.story
       };
     };
@@ -3218,6 +3225,7 @@ exports.default = DecoratedEndNotes;
 
 DecoratedEndNotes.childContextTypes = {
   story: _propTypes2.default.object,
+  datasets: _propTypes2.default.datasets,
   contextualizers: _propTypes2.default.object,
   LinkComponent: _propTypes2.default.func
 };
